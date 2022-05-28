@@ -1,5 +1,3 @@
-import { sound } from '@pixi/sound';
-import { Actions } from 'pixi-actions';
 import * as px from 'pixi.js';
 import { CARDS_NAMES } from '../helpers/constants';
 import { getRandomSet, shuffle } from '../helpers/utils';
@@ -12,7 +10,6 @@ export default class Table extends px.Container {
 
     constructor() {
         super();
-
         this.initCardDeck();
     }
 

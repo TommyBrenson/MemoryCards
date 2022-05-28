@@ -15,7 +15,7 @@ export default class EndGame extends Scene {
     }
 
     public update(): void {
-        console.log("Update scene End");
+        
     }
 
 

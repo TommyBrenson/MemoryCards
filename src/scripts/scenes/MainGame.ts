@@ -3,7 +3,6 @@ import { Timer } from 'eventemitter3-timer';
 import { Actions } from 'pixi-actions';
 import * as px from 'pixi.js';
 
-import Card from '../entities/Card';
 import Table from '../entities/Table';
 import { textStyle } from '../helpers/constants';
 import Scene from './Scene';
@@ -49,7 +48,6 @@ export default class MainGame extends Scene {
         this.timer.loop = true;
 
         this.timer.on("repeat", (elapsed, repeat) => {
-            console.log(app.stage.children)
             this.wrapper.removeChildren();
             this.wrapper.addChild(new px.Text(`${String(Math.floor(repeat / 60)).padStart(2, "0")} : ${String(repeat % 60).padStart(2, "0")}`, new px.TextStyle(textStyle)));
         });
@@ -63,7 +61,9 @@ export default class MainGame extends Scene {
             this.timer.remove();
 
             app.ticker.stop();
+
             sound.play("ended", { volume: 0.15 });
+            
             setTimeout(() => {
                 app.scene.start("EndGame");
             }, 5000);
@@ -76,7 +76,7 @@ export default class MainGame extends Scene {
             if (!pair.includes(undefined)) {
         
                 if (pair[0].textures[0] == pair[1].textures[0] && pair[0] !== pair[1]) {
-                    console.log("Equals!");
+
                     pair.forEach((card) => {
                         card.interactive = false; 
                         card.isPaired = true;
@@ -85,7 +85,6 @@ export default class MainGame extends Scene {
                 }
         
                 else {
-                    console.log("Doesn't equal!");
                     Actions.parallel(
                         Actions.runFunc(() => {
                             pair[1].isPaired = false;
